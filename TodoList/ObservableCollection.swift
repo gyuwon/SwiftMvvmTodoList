@@ -17,7 +17,7 @@ enum CollectionChanged<T> {
     
 }
 
-class ObservableCollection<T> : Collection {
+class ObservableCollection<T>: Collection {
     
     private var _collection = [T]()
     private var _collectionChanged = PublishSubject<CollectionChanged<T>>()
