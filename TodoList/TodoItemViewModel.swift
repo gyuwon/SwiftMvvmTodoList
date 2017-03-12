@@ -13,13 +13,13 @@ class TodoItemViewModel {
     
     private let _propertyChanged = PublishSubject<String>()
     
-    public private(set) var description: String {
+    var description: String {
         didSet {
            _propertyChanged.onNext("description")
         }
     }
     
-    public private(set) var isComplete: Bool = false {
+    var isComplete: Bool = false {
         didSet {
             _propertyChanged.onNext("isComplete")
         }
@@ -30,17 +30,5 @@ class TodoItemViewModel {
     }
     
     var propertyChanged: Observable<String> { return _propertyChanged }
-    
-    func updateDescription(description: String) {
-        self.description = description
-    }
-    
-    func markAsComplete() {
-        isComplete = true
-    }
-    
-    func markAsIncomplete() {
-        isComplete = false
-    }
 
 }
