@@ -1,0 +1,13 @@
+included:
+    - TodoList
+    - TodoListTests
+    - TodoListUITests
+excluded:
+    - Pods
+    - DerivedData
+disabled_rules:
+    - line_length
+    - trailing_whitespace
+    - trailing_newline
+    - type_name
+    - function_parameter_count

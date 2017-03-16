@@ -30,7 +30,7 @@ class TodoItemListViewModel {
             confirmText: "Delete",
             cancelText: "Cancel",
             destructive: true,
-            confirmed: { Void in self.items.remove(at: index)
+            confirmed: { _ in self.items.remove(at: index)
         })
     }
     

@@ -18,7 +18,7 @@ class ObservableCollection_specs: XCTestCase {
         let item = UUID().uuidString
         
         // Act
-        sut.append(item: item);
+        sut.append(item: item)
         
         // Assert
         XCTAssertEqual(1, sut.count)
@@ -26,7 +26,7 @@ class ObservableCollection_specs: XCTestCase {
         XCTAssertEqual(item, actual)
     }
     
-    func test_append_raises_collectionChanged_event_correctly(){
+    func test_append_raises_collectionChanged_event_correctly() {
         // Arrange
         let sut = ObservableCollection<String>()
         sut.append(item: UUID().uuidString)

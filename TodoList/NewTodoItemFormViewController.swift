@@ -14,7 +14,7 @@ class NewTodoItemFormViewController: UIViewController {
     
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
-    private var _binding: Disposable? = nil
+    private var _binding: Disposable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +28,12 @@ class NewTodoItemFormViewController: UIViewController {
                 switch propertyName {
                 case "description":
                     self?.descriptionField.text = viewModel.description
-                    break;
+                    break
                 default:
-                    break;
+                    break
                 }
             }),
-            viewModel.submit.canExecuteChanged.subscribe(onNext: { [weak self] unit in
+            viewModel.submit.canExecuteChanged.subscribe(onNext: { [weak self] _ in
                 let canExecuteCommand: Bool = viewModel.submit.canExecute()
                 self?.submitButton.isEnabled = canExecuteCommand
             })
@@ -41,7 +41,7 @@ class NewTodoItemFormViewController: UIViewController {
         
         let fromView = CompositeDisposable(disposables: [
             descriptionField.rx.text.subscribe(onNext: { value in viewModel.description = value! }),
-            submitButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] Void in
+            submitButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] _ in
                 viewModel.submit.execute()
                 self?.dismiss(animated: true)
             })

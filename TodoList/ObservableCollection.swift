@@ -27,9 +27,9 @@ class ObservableCollection<T>: Collection {
     subscript(position: Int) -> T { return _collection[position] }
     var collectionChanged: Observable<CollectionChanged<T>> { return _collectionChanged }
     
-    func index(after i: Int) -> Int {
-        guard i < endIndex else { fatalError("The parameter after must be less than endIndex.") }
-        return i + 1
+    func index(after index: Int) -> Int {
+        guard index < endIndex else { fatalError("The parameter after must be less than endIndex.") }
+        return index + 1
     }
     
     func append(item: T) {

@@ -20,7 +20,7 @@ class TodoItemViewModel_specs: XCTestCase {
         let sut = TodoItemViewModel(description: description)
         
         // Assert
-        XCTAssert(description == sut.description, "description was not set correctly.");
+        XCTAssert(description == sut.description, "description was not set correctly.")
     }
     
     func test_init_sets_isComplete_to_false() {
@@ -40,7 +40,7 @@ class TodoItemViewModel_specs: XCTestCase {
         _ = sut.propertyChanged.subscribe(onNext: { propertyName in events.append(propertyName) })
         
         // Act
-        sut.description = UUID().uuidString;
+        sut.description = UUID().uuidString
         
         // Assert
         XCTAssertEqual(1, events.count)

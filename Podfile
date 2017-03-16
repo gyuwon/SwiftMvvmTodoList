@@ -8,6 +8,7 @@ target 'TodoList' do
   # Pods for TodoList
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
+  pod 'SwiftLint'
 
   target 'TodoListTests' do
     inherit! :search_paths
