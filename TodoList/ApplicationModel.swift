@@ -10,10 +10,11 @@ import Foundation
 
 class ApplicationModel {
     
+    let itemList: TodoItemListViewModel
     let newItemForm: NewTodoItemFormViewModel
-    let itemList = TodoItemListViewModel()
     
-    init() {
+    init(messageBox: MessageBox) {
+        itemList = TodoItemListViewModel(messageBox: messageBox)
         newItemForm = NewTodoItemFormViewModel(itemList: itemList)
     }
     

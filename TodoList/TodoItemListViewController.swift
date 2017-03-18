@@ -58,9 +58,13 @@ class TodoItemListViewController: UITableViewController {
         
         _binding = _viewModel.items.collectionChanged.subscribe(onNext: { args in self.tableView.reloadData() })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        ServiceLocator.messageBox.currentViewController = self
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        ServiceLocator.messageBox.currentViewController = nil
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,6 +78,10 @@ class TodoItemListViewController: UITableViewController {
         cell.dataContext = itemViewModel
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        _viewModel.deleteItem.execute(parameter: indexPath.row as AnyObject)
     }
 
 }

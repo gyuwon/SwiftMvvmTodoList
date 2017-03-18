@@ -10,6 +10,6 @@ import Foundation
 
 struct ViewModelLocator {
     
-    static let applicationModel = ApplicationModel()
+    static let applicationModel = ApplicationModel(messageBox: ServiceLocator.messageBox)
     
 }

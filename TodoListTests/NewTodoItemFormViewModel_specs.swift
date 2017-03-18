@@ -14,7 +14,7 @@ class NewTodoItemFormViewModel_specs: XCTestCase {
     
     func test_description_setter_raises_propertyChanged_correctly() {
         // Arrange
-        let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel())
+        let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel(messageBox: StubMessageBox()))
         var events = [String]()
         _ = sut.propertyChanged.subscribe(onNext: { event in events.append(event) })
         
@@ -28,7 +28,7 @@ class NewTodoItemFormViewModel_specs: XCTestCase {
     
     func test_submit_adds_new_item_to_list() {
         // Arrange
-        let itemList = TodoItemListViewModel()
+        let itemList = TodoItemListViewModel(messageBox: StubMessageBox())
         let sut = NewTodoItemFormViewModel(itemList: itemList)
         let description: String = UUID().uuidString
         sut.description = description
@@ -43,7 +43,7 @@ class NewTodoItemFormViewModel_specs: XCTestCase {
     
     func test_submit_clears_description_field() {
         // Arrange
-        let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel())
+        let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel(messageBox: StubMessageBox()))
         sut.description = UUID().uuidString
         
         // Act
@@ -55,7 +55,7 @@ class NewTodoItemFormViewModel_specs: XCTestCase {
     
     func test_cannot_execute_submit_if_description_is_empty() {
         // Arrange
-        let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel())
+        let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel(messageBox: StubMessageBox()))
         sut.description = ""
         
         // Act
@@ -67,7 +67,7 @@ class NewTodoItemFormViewModel_specs: XCTestCase {
     
     func test_description_setter_raises_canExecuteChanged_of_submit_command() {
         // Arrange
-        let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel())
+        let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel(messageBox: StubMessageBox()))
         var monitor: Int = 0
         _ = sut.submit.canExecuteChanged.subscribe(onNext: { Unit in monitor = monitor + 1 })
         
