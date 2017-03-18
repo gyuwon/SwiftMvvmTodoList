@@ -11,16 +11,15 @@ import Foundation
 class TodoItemListViewModel {
     
     private let _messageBox: MessageBox
-    private var _deleteItem: RelayCommand? = nil
+    private lazy var _deleteItem: RelayCommand = RelayCommand(execute: self.executeDeleteItem)
 
     let items = ObservableCollection<TodoItemViewModel>()
     
     init(messageBox: MessageBox) {
         _messageBox = messageBox
-        _deleteItem = RelayCommand(execute: executeDeleteItem)
     }
     
-    var deleteItem: RelayCommand { return _deleteItem! }
+    var deleteItem: RelayCommand { return _deleteItem }
     
     private func executeDeleteItem(parameter: AnyObject?) {
         let index = parameter as? Int
