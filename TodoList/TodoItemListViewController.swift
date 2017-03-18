@@ -81,7 +81,7 @@ class TodoItemListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        _viewModel.deleteItem.execute(parameter: indexPath.row as AnyObject)
+        _viewModel.deleteItem.execute(parameter: indexPath.row)
     }
 
 }

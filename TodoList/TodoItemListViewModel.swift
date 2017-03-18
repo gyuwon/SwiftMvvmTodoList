@@ -22,7 +22,7 @@ class TodoItemListViewModel {
     
     var deleteItem: RelayCommand { return _deleteItem! }
     
-    private func executeDeleteItem(parameter: AnyObject?) {
+    private func executeDeleteItem(parameter: Any?) {
         let index = parameter as? Int
         if index == nil {
             return
