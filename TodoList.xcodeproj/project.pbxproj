@@ -111,6 +111,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A41302F01E7CF46300B59EE8 /* MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				A44E80811E74F8CE00E41C77 /* ObservableCollection_specs.swift */,
+				A44B28FD1E751A2B0068BCB8 /* RelayCommand_specs.swift */,
+			);
+			name = MVVM;
+			sourceTree = "<group>";
+		};
+		A41302F11E7CF47300B59EE8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A4C503541E741BA200E1F149 /* TodoItemViewModel_specs.swift */,
+				A44B28F91E7514670068BCB8 /* NewTodoItemFormViewModel_specs.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
 		A45895ED1E75A465007E211D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,11 +199,9 @@
 		A4C503531E741BA200E1F149 /* TodoListTests */ = {
 			isa = PBXGroup;
 			children = (
-				A4C503541E741BA200E1F149 /* TodoItemViewModel_specs.swift */,
+				A41302F01E7CF46300B59EE8 /* MVVM */,
+				A41302F11E7CF47300B59EE8 /* ViewModels */,
 				A4C503561E741BA200E1F149 /* Info.plist */,
-				A44E80811E74F8CE00E41C77 /* ObservableCollection_specs.swift */,
-				A44B28F91E7514670068BCB8 /* NewTodoItemFormViewModel_specs.swift */,
-				A44B28FD1E751A2B0068BCB8 /* RelayCommand_specs.swift */,
 			);
 			path = TodoListTests;
 			sourceTree = "<group>";
