@@ -37,5 +37,11 @@ class ObservableCollection<T>: Collection {
         _collection.append(item)
         _collectionChanged.onNext(CollectionChanged<T>.itemsAdded(location, [item]))
     }
+    
+    func remove(at index: Int) {
+        let items = [_collection[index]]
+        _collection.remove(at: index)
+        _collectionChanged.onNext(CollectionChanged<T>.itemsRemoved(index, items))
+    }
 
 }

@@ -50,4 +50,51 @@ class ObservableCollection_specs: XCTestCase {
         }
     }
     
+    func test_remove_at_removes_item_at_the_specified_index() {
+        // Arrange
+        var data = [UUID().uuidString, UUID().uuidString, UUID().uuidString]
+        let sut = ObservableCollection<String>()
+        for i in 0..<3 {
+            sut.append(item: data[i])
+        }
+        let index = Int(arc4random_uniform(UInt32(sut.count)))
+        
+        // Act
+        sut.remove(at: index)
+        
+        // Assert
+        data.remove(at: index)
+        XCTAssertEqual(data.count, sut.count)
+        for i in 0..<data.count {
+            XCTAssertEqual(data[i], sut[i])
+        }
+    }
+    
+    func test_remove_at_raises_collectionChanged_event_correctly() {
+        // Arrange
+        var data = [UUID().uuidString, UUID().uuidString, UUID().uuidString]
+        let sut = ObservableCollection<String>()
+        for i in 0..<3 {
+            sut.append(item: data[i])
+        }
+        var events = [CollectionChanged<String>]()
+        _ = sut.collectionChanged.subscribe(onNext: { event in events.append(event) })
+        let index = Int(arc4random_uniform(UInt32(sut.count)))
+        
+        // Act
+        sut.remove(at: index)
+        
+        // Assert
+        XCTAssertEqual(1, events.count)
+        switch events[0] {
+        case .itemsRemoved(let location, let items):
+            XCTAssertEqual(index, location)
+            XCTAssertEqual(1, items.count)
+            XCTAssertEqual(data[index], items[0])
+            break
+        default:
+            XCTFail("collectionChanged event is not raised correctly.")
+        }
+    }
+    
 }
