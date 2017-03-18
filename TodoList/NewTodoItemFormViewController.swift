@@ -33,7 +33,7 @@ class NewTodoItemFormViewController: UIViewController {
                     break;
                 }
             }),
-            viewModel.submit.canExecuteChanged.subscribe(onNext: { unit in
+            viewModel.submit.canExecuteChanged.subscribe(onNext: {
                 let canExecuteCommand: Bool = viewModel.submit.canExecute()
                 self.submitButton.isEnabled = canExecuteCommand
             })
