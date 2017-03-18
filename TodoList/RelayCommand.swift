@@ -11,30 +11,30 @@ import RxSwift
 
 class RelayCommand {
     
-    private let _execute: () -> Void
-    private let _canExecute: () -> Bool
+    private let _execute: (AnyObject?) -> Void
+    private let _canExecute: (AnyObject?) -> Bool
     private let _canExecuteChanged = PublishSubject<Unit>()
     
-    init(execute: @escaping () -> Void) {
+    init(execute: @escaping (AnyObject?) -> Void) {
         _execute = execute
         _canExecute = { Void in true }
     }
     
-    init(execute: @escaping () -> Void, canExecute: @escaping () -> Bool) {
+    init(execute: @escaping (AnyObject?) -> Void, canExecute: @escaping (AnyObject?) -> Bool) {
         _execute = execute
         _canExecute = canExecute
     }
     
     var canExecuteChanged: Observable<Unit> { return _canExecuteChanged }
     
-    func execute() {
-        if canExecute() {
-            _execute()
+    func execute(parameter: AnyObject? = nil) {
+        if canExecute(parameter: parameter) {
+            _execute(parameter)
         }
     }
     
-    func canExecute() -> Bool {
-        return _canExecute()
+    func canExecute(parameter: AnyObject? = nil) -> Bool {
+        return _canExecute(parameter)
     }
     
     func raiseCanExecuteChanged() {
