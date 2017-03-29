@@ -24,26 +24,26 @@ class NewTodoItemFormViewController: UIViewController {
         let viewModel: NewTodoItemFormViewModel = ViewModelLocator.applicationModel.newItemForm
         
         let fromViewModel = CompositeDisposable(disposables: [
-            viewModel.propertyChanged.subscribe(onNext: { propertyName in
+            viewModel.propertyChanged.subscribe(onNext: { [weak self] propertyName in
                 switch propertyName {
                 case "description":
-                    self.descriptionField.text = viewModel.description
+                    self?.descriptionField.text = viewModel.description
                     break;
                 default:
                     break;
                 }
             }),
-            viewModel.submit.canExecuteChanged.subscribe(onNext: { unit in
+            viewModel.submit.canExecuteChanged.subscribe(onNext: { [weak self] unit in
                 let canExecuteCommand: Bool = viewModel.submit.canExecute()
-                self.submitButton.isEnabled = canExecuteCommand
+                self?.submitButton.isEnabled = canExecuteCommand
             })
         ])
         
         let fromView = CompositeDisposable(disposables: [
             descriptionField.rx.text.subscribe(onNext: { value in viewModel.description = value! }),
-            submitButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { Void in
+            submitButton.rx.controlEvent(UIControlEvents.touchUpInside).subscribe(onNext: { [weak self] Void in
                 viewModel.submit.execute()
-                self.dismiss(animated: true)
+                self?.dismiss(animated: true)
             })
         ])
         
