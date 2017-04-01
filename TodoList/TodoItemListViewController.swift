@@ -25,10 +25,10 @@ class TodoItemCell: UITableViewCell {
                 return
             }
             
-            let fromViewModel = dataContext!.propertyChanged.subscribe(onNext: { propertyName in
+            let fromViewModel = dataContext!.propertyChanged.subscribe(onNext: { [weak self] propertyName in
                 switch propertyName {
                 case "description":
-                    self.descriptionLabel.text = self.dataContext!.description
+                    self?.descriptionLabel.text = self?.dataContext!.description
                     break;
                 default:
                     break;
@@ -56,7 +56,7 @@ class TodoItemListViewController: UITableViewController {
         
         _binding?.dispose()
         
-        _binding = _viewModel.items.collectionChanged.subscribe(onNext: { args in self.tableView.reloadData() })
+        _binding = _viewModel.items.collectionChanged.subscribe(onNext: { [weak self] args in self?.tableView.reloadData() })
     }
     
     override func viewDidAppear(_ animated: Bool) {
