@@ -14,16 +14,14 @@ class UIAlertMessageBox: MessageBox {
     var currentViewController: UIViewController? = nil
 
     func confirm(title: String, message: String, confirmText: String, cancelText: String, destructive: Bool, confirmed: @escaping (Void) -> Void) {
-        if currentViewController == nil {
-            return
-        }
+        guard let currentViewController = currentViewController else { return }
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: cancelText, style: .default))
         alert.addAction(UIAlertAction(title: confirmText, style: destructive ? .destructive : .default) { (action) -> Void in
             confirmed()
         })
-        currentViewController!.present(alert, animated: true, completion: nil)
+        currentViewController.present(alert, animated: true, completion: nil)
     }
 
 }

@@ -20,12 +20,12 @@ class TodoItemCell: UITableViewCell {
         didSet {
             _binding?.dispose()
             
-            if dataContext == nil {
+            guard let dataContext = dataContext else {
                 descriptionLabel.text = ""
                 return
             }
             
-            let fromViewModel = dataContext!.propertyChanged.subscribe(onNext: { [weak self] propertyName in
+            let fromViewModel = dataContext.propertyChanged.subscribe(onNext: { [weak self] propertyName in
                 switch propertyName {
                 case "description":
                     self?.descriptionLabel.text = self?.dataContext!.description
@@ -37,7 +37,7 @@ class TodoItemCell: UITableViewCell {
             
             _binding = CompositeDisposable(disposables: [fromViewModel])
             
-            descriptionLabel.text = dataContext!.description
+            descriptionLabel.text = dataContext.description
         }
     }
 
