@@ -51,7 +51,7 @@ class RelayCommand_specs: XCTestCase {
     func test_raiseCanExecuteChanged_raises_canExecuteChanged_event() {
         // Arrange
         let sut = RelayCommand(execute: { Void in })
-        var events = [Unit]()
+        var events = [Void]()
         _ = sut.canExecuteChanged.subscribe(onNext: { event in events.append(event) })
         
         // Act

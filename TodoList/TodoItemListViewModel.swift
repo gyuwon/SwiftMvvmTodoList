@@ -23,18 +23,15 @@ class TodoItemListViewModel {
     var deleteItem: RelayCommand { return _deleteItem! }
     
     private func executeDeleteItem(parameter: Any?) {
-        let index = parameter as? Int
-        if index == nil {
-            return
-        }
-        
+        guard let index = parameter as? Int else { return }
+
         _messageBox.confirm(
             title: "Delete Todo Item?",
-            message: "Description: \"" + items[index!].description + "\"",
+            message: "Description: \"" + items[index].description + "\"",
             confirmText: "Delete",
             cancelText: "Cancel",
             destructive: true,
-            confirmed: { Void in self.items.remove(at: index!)
+            confirmed: { Void in self.items.remove(at: index)
         })
     }
     

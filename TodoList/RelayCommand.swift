@@ -13,7 +13,7 @@ class RelayCommand {
     
     private let _execute: (Any?) -> Void
     private let _canExecute: (Any?) -> Bool
-    private let _canExecuteChanged = PublishSubject<Unit>()
+    private let _canExecuteChanged = PublishSubject<Void>()
     
     init(execute: @escaping (Any?) -> Void) {
         _execute = execute
@@ -25,7 +25,7 @@ class RelayCommand {
         _canExecute = canExecute
     }
     
-    var canExecuteChanged: Observable<Unit> { return _canExecuteChanged }
+    var canExecuteChanged: Observable<Void> { return _canExecuteChanged }
     
     func execute(parameter: Any? = nil) {
         if canExecute(parameter: parameter) {
@@ -38,6 +38,6 @@ class RelayCommand {
     }
     
     func raiseCanExecuteChanged() {
-        _canExecuteChanged.onNext(Unit())
+        _canExecuteChanged.onNext(Void())
     }
 }
