@@ -33,12 +33,12 @@ class NewTodoItemFormViewModel {
     
     var submit: RelayCommand { return _submit! }
     
-    private func executeSubmit(parameter: AnyObject?) {
+    private func executeSubmit(parameter: Any?) {
         _itemList.items.append(item: TodoItemViewModel(description: self.description))
         description = ""
     }
     
-    private func canExecuteSubmit(parameter: AnyObject?) -> Bool {
+    private func canExecuteSubmit(parameter: Any?) -> Bool {
         return description != ""
     }
     
