@@ -13,13 +13,12 @@ class NewTodoItemFormViewModel {
     
     private let _propertyChanged = PublishSubject<String>()
     private let _itemList: TodoItemListViewModel
-    private var _submit: RelayCommand? = nil
-    
+    private lazy var _submit: RelayCommand = RelayCommand(
+        execute: self.executeSubmit,
+        canExecute: self.canExecuteSubmit)
+
     init(itemList: TodoItemListViewModel) {
         _itemList = itemList
-        _submit = RelayCommand(
-            execute: executeSubmit,
-            canExecute: canExecuteSubmit)
     }
     
     var propertyChanged: Observable<String> { return _propertyChanged }
@@ -27,11 +26,11 @@ class NewTodoItemFormViewModel {
     var description: String = "" {
         didSet {
             _propertyChanged.onNext("description")
-            _submit!.raiseCanExecuteChanged()
+            _submit.raiseCanExecuteChanged()
         }
     }
     
-    var submit: RelayCommand { return _submit! }
+    var submit: RelayCommand { return _submit }
     
     private func executeSubmit(parameter: Any?) {
         _itemList.items.append(item: TodoItemViewModel(description: self.description))
