@@ -69,7 +69,7 @@ class NewTodoItemFormViewModel_specs: XCTestCase {
         // Arrange
         let sut = NewTodoItemFormViewModel(itemList: TodoItemListViewModel(messageBox: StubMessageBox()))
         var monitor: Int = 0
-        _ = sut.submit.canExecuteChanged.subscribe(onNext: { Unit in monitor = monitor + 1 })
+        _ = sut.submit.canExecuteChanged.subscribe(onNext: { monitor = monitor + 1 })
         
         // Act
         sut.description = UUID().uuidString
