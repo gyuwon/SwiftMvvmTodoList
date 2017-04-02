@@ -14,7 +14,7 @@ class TodoItemCell: UITableViewCell {
 
     @IBOutlet var descriptionLabel: UILabel!
     
-    private var _binding: Disposable? = nil
+    private var _binding: Disposable?
     
     var dataContext: TodoItemViewModel? = nil {
         didSet {
@@ -29,9 +29,9 @@ class TodoItemCell: UITableViewCell {
                 switch propertyName {
                 case "description":
                     self?.descriptionLabel.text = self?.dataContext!.description
-                    break;
+                    break
                 default:
-                    break;
+                    break
                 }
             })
             
@@ -49,14 +49,14 @@ class TodoItemListViewController: UITableViewController {
         return ViewModelLocator.applicationModel.itemList
     }
     
-    private var _binding: Disposable? = nil
+    private var _binding: Disposable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         _binding?.dispose()
         
-        _binding = _viewModel.items.collectionChanged.subscribe(onNext: { [weak self] args in self?.tableView.reloadData() })
+        _binding = _viewModel.items.collectionChanged.subscribe(onNext: { [weak self] _ in self?.tableView.reloadData() })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,10 +72,12 @@ class TodoItemListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "todoItemCell") as! TodoItemCell
-        
-        let itemViewModel = _viewModel.items[indexPath.row]
-        cell.dataContext = itemViewModel
+        let cell = tableView.dequeueReusableCell(withIdentifier: "todoItemCell", for: indexPath)
+
+        if let cell = cell as? TodoItemCell {
+            let itemViewModel = _viewModel.items[indexPath.row]
+            cell.dataContext = itemViewModel
+        }
         
         return cell
     }

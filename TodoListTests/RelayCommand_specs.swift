@@ -15,7 +15,7 @@ class RelayCommand_specs: XCTestCase {
     func test_execute_relays_to_function() {
         // Arrange
         var monitor: Int = 0
-        let sut = RelayCommand(execute: { Void in monitor = monitor + 1 })
+        let sut = RelayCommand(execute: { _ in monitor = monitor + 1 })
         
         // Act
         sut.execute()
@@ -50,7 +50,7 @@ class RelayCommand_specs: XCTestCase {
     
     func test_raiseCanExecuteChanged_raises_canExecuteChanged_event() {
         // Arrange
-        let sut = RelayCommand(execute: { Void in })
+        let sut = RelayCommand(execute: { _ in })
         var events = [Void]()
         _ = sut.canExecuteChanged.subscribe(onNext: { event in events.append(event) })
         

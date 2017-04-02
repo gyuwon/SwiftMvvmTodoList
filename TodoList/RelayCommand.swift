@@ -17,7 +17,7 @@ class RelayCommand {
     
     init(execute: @escaping (Any?) -> Void) {
         _execute = execute
-        _canExecute = { Void in true }
+        _canExecute = { _ in true }
     }
     
     init(execute: @escaping (Any?) -> Void, canExecute: @escaping (Any?) -> Bool) {
